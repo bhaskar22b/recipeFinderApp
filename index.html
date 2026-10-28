@@ -1,48 +1,179 @@
+
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Recipe Finder App</title>
-    <link rel="stylesheet" href="../style.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
-      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
-  </head>
-  <body>
-    <div class="container">
-      <header>
-        <h1><i class="fas fa-utensils"></i> Recipe Finder</h1>
-        <p>Find delicious recipes from around the world</p>
-        <p>Turn Ingredients into Magic</p>
-      </header>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#002B5B" />
+  <meta name="description" content="Discover delicious recipes from around the world. Explore ingredients, cooking instructions and meal inspiration with Recipe Finder." />
+  <title>Recipe Finder | Discover Your Next Favorite Meal</title>
 
-      <p class="api-link">Data from <a href="https://www.themealdb.com/api.php">TheMealDB 🧑‍🍳</a></p>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet" />
 
-      <div class="search-container">
-        <input type="text" id="search-input" placeholder="Search for meals or keywords" />
-        <button id="search-btn">Search</button>
+  <link rel="stylesheet" href="./style.css" />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+</head>
+<body>
+  <div class="site-shell">
+    <nav class="navbar">
+      <a href="#" class="brand" aria-label="Recipe Finder home">
+        <span class="brand-icon"><i class="fa-solid fa-utensils"></i></span>
+        <span>Recipe<span class="brand-accent">Finder</span></span>
+      </a>
+
+      <div class="nav-links">
+        <a href="#home" class="nav-link active">Home</a>
+        <a href="#recipes" class="nav-link">Explore Recipes</a>
+        <a href="#about" class="nav-link">About</a>
       </div>
 
-      <div id="error-container" class="hidden">
-        <p>No meals found. Try another search term!</p>
-      </div>
+      <a href="#recipes" class="nav-cta">
+        Find a Recipe <i class="fa-solid fa-arrow-right"></i>
+      </a>
+    </nav>
 
-      <div id="result-heading"></div>
+    <main>
+      <section class="hero" id="home">
+        <div class="hero-content">
+          <span class="eyebrow">
+            <i class="fa-solid fa-sparkles"></i>
+            YOUR NEXT FAVORITE MEAL STARTS HERE
+          </span>
 
-      <div id="meals" class="meals-container"></div>
+          <h1>Good food brings<br />people <span>together.</span></h1>
 
-      <div id="meal-details" class="hidden">
-        <button id="back-btn"><i class="fas fa-arrow-left"></i> Back to recipes</button>
+          <p class="hero-description">
+            Discover delicious dishes from around the world.
+            Find your inspiration, explore new flavors, and turn
+            everyday ingredients into something extraordinary.
+          </p>
 
+          <div class="hero-actions">
+            <a href="#recipes" class="primary-btn">
+              Explore Recipes <i class="fa-solid fa-arrow-right"></i>
+            </a>
+            <span class="hero-note">
+              <i class="fa-solid fa-heart"></i>
+              Made for food lovers
+            </span>
+          </div>
+
+          <div class="hero-stats">
+            <div>
+              <strong>Global</strong>
+              <span>Food inspiration</span>
+            </div>
+            <div>
+              <strong>Easy</strong>
+              <span>Step-by-step recipes</span>
+            </div>
+            <div>
+              <strong>Fresh</strong>
+              <span>Ideas for every day</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-visual" aria-hidden="true">
+          <div class="hero-image-frame">
+            <img
+              src="https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=1000&q=85"
+              alt=""
+            />
+          </div>
+          <div class="floating-card">
+            <span class="floating-icon"><i class="fa-solid fa-leaf"></i></span>
+            <div>
+              <strong>Something delicious</strong>
+              <p>Waiting to be discovered</p>
+            </div>
+          </div>
+          <div class="decorative-dot dot-one"></div>
+          <div class="decorative-dot dot-two"></div>
+        </div>
+      </section>
+
+      <section class="search-section" id="recipes">
+        <div class="section-heading">
+          <span class="eyebrow">LET'S GET COOKING</span>
+          <h2>What are you craving <span>today?</span></h2>
+          <p>Search a dish, ingredient, or cuisine to find your next meal.</p>
+        </div>
+
+        <div class="search-container">
+          <i class="fa-solid fa-magnifying-glass search-icon"></i>
+          <input
+            type="text"
+            id="search-input"
+            placeholder="Try chicken, pasta, curry..."
+            aria-label="Search meals or ingredients"
+          />
+          <button id="search-btn" type="button">
+            Search Recipes <i class="fa-solid fa-arrow-right"></i>
+          </button>
+        </div>
+
+        <p class="search-hint">
+          <i class="fa-regular fa-lightbulb"></i>
+          Tip: Search for a meal name like “Arrabiata” or “Chicken”.
+        </p>
+
+        <div id="error-container" class="hidden" role="alert" aria-live="polite">
+          <p>No meals found. Try another search term!</p>
+        </div>
+
+        <div id="result-heading" aria-live="polite"></div>
+        <div id="meals" class="meals-container"></div>
+      </section>
+
+      <section class="about-section" id="about">
+        <div class="about-icon"><i class="fa-solid fa-book-open"></i></div>
+        <div class="about-copy">
+          <span class="eyebrow">A LITTLE FOOD INSPIRATION</span>
+          <h2>Make every meal a <span>new discovery.</span></h2>
+          <p>
+            Whether you're planning dinner, learning to cook, or simply
+            exploring something new, find recipes that make time in the
+            kitchen more enjoyable. Great food doesn't have to be complicated.
+          </p>
+        </div>
+        <a href="#recipes" class="outline-btn">
+          Find Your Recipe <i class="fa-solid fa-arrow-right"></i>
+        </a>
+      </section>
+
+      <section id="meal-details" class="hidden">
+        <button id="back-btn" type="button">
+          <i class="fa-solid fa-arrow-left"></i> Back to recipes
+        </button>
         <div class="meal-details-content"></div>
-      </div>
-    </div>
+      </section>
+    </main>
 
-    <script src="../script.js"></script>
-  </body>
+    <footer class="footer">
+      <a href="#home" class="brand footer-brand">
+        <span class="brand-icon"><i class="fa-solid fa-utensils"></i></span>
+        <span>Recipe<span class="brand-accent">Finder</span></span>
+      </a>
+
+      <p>Discover something delicious. One recipe at a time.</p>
+
+      <p class="footer-credit">
+        Recipe data provided by
+        <a href="https://www.themealdb.com/api.php" target="_blank" rel="noopener noreferrer">TheMealDB</a>
+      </p>
+
+      <span class="copyright">Made with <i class="fa-solid fa-heart"></i> for food lovers.</span>
+    </footer>
+  </div>
+
+  <script src="./script.js"></script>
+</body>
 </html>

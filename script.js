@@ -16,7 +16,17 @@ searchBtn.addEventListener("click", searchMeals);       // search with click btn
 
 mealsContainer.addEventListener("click", handleMealClick);     // when we click on meal card it's show meal deatails
 
-backBtn.addEventListener("click", () => mealDetails.classList.add("hidden"));     //back btn in result page
+//back btn in result page
+
+backBtn.addEventListener("click", () => {
+  mealDetails.classList.add("hidden");
+
+  document.getElementById("recipes").scrollIntoView({
+    behavior: "smooth",
+    block: "start",
+  });
+});
+
 
 // search with enter key
 searchInput.addEventListener("keypress", (e) => {
@@ -41,9 +51,13 @@ async function searchMeals() {
 
     // fetch meals from API
     // www.themealdb.com/api/json/v1/1/search.php?s=chicken
-    const response = await fetch(`${SEARCH_URL}${searchTerm}`);
+
+    const response = await fetch(
+      `${SEARCH_URL}${encodeURIComponent(searchTerm)}`
+    );
+
     const data = await response.json();
-    
+
     // if result = not found then notnig show
     if (data.meals === null) {
       // no meals found
@@ -54,7 +68,7 @@ async function searchMeals() {
     }
     // if result = found then result show
     else {
-      resultHeading.textContent = `Search results for "${searchTerm}":`;      
+      resultHeading.textContent = `Search results for "${searchTerm}":`;
       displayMeals(data.meals);
       searchInput.value = "";
     }
@@ -93,14 +107,14 @@ async function handleMealClick(e) {
     const response = await fetch(`${LOOKUP_URL}${mealId}`);
     const data = await response.json();
 
-      // console.log(data)
+    // console.log(data)
 
     if (data.meals && data.meals[0]) {
       const meal = data.meals[0];
 
       const ingredients = [];
 
-        // checks if an ingredient exists and is not an empty string tne we push  ingredient & measure {i} mean one by one all i & m
+      // checks if an ingredient exists and is not an empty string tne we push  ingredient & measure {i} mean one by one all i & m
       for (let i = 1; i <= 20; i++) {
         if (meal[`strIngredient${i}`] && meal[`strIngredient${i}`].trim() !== "") {
           ingredients.push({
@@ -125,23 +139,22 @@ async function handleMealClick(e) {
              <h3>Ingredients</h3>
              <ul class="ingredients-list">
                ${ingredients
-                 .map(
-                   (item) => `
+          .map(
+            (item) => `
                  <li><i class="fas fa-check-circle"></i> ${item.measure} ${item.ingredient}</li>
                `
-                 ) //data.join() mathod to convert string  //data = .map()   //.map() is array
-                 .join("")}        
+          ) //data.join() mathod to convert string  //data = .map()   //.map() is array
+          .join("")}        
              </ul>
            </div>
-           ${
-             meal.strYoutube          //if there is yt line then put in it  // if not then empty
-               ? `
+           ${meal.strYoutube          //if there is yt line then put in it  // if not then empty
+          ? `
              <a href="${meal.strYoutube}" target="_blank" class="youtube-link">
                <i class="fab fa-youtube"></i> Watch Video
              </a>
            `
-               : ""
-           }
+          : ""
+        }
          `;
 
       mealDetails.classList.remove("hidden");      //remove hidden class 
